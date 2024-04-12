@@ -1,0 +1,42 @@
+.NotFound {
+    min-height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.NotFound .title {
+    font-size: 104px;
+    font-weight: 700;
+    animation: rotation 4s linear infinite;
+}
+
+.NotFound .text {
+    align-items: center;
+    font-size: 24px;
+}
+
+
+.NotFound a {
+    text-decoration: none;
+    color: #009d93;
+    cursor: pointer;
+    transition: opacity .3s linear;
+}
+
+.NotFound a:hover {
+    opacity: 0.7;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}

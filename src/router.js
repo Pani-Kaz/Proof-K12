@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Posts from "./pages/home.tsx";
 import Post from "./pages/post.tsx";
+import NotFound from "./pages/404.tsx";
 
 function AppRoutes() {
     return (
@@ -11,6 +12,7 @@ function AppRoutes() {
                 <Routes>
                 <Route path='/' element={<Posts />}></Route>
                 <Route path='/post/:postId' element={<Post/>}></Route>
+                <Route path='*' element={<NotFound/>}></Route>
                 </Routes>
             </BrowserRouter>
         </main>
