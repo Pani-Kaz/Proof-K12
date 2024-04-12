@@ -1,0 +1,15 @@
+.footer {
+    width: 100%;
+    background: #121212;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer .text {
+    font-family: 'DM Sans', sans-serif;
+    color: #C5C6C8;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
