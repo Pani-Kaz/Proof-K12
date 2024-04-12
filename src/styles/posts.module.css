@@ -1,0 +1,108 @@
+.posts {
+    font-family: 'DM Sans', sans-serif;
+}
+
+.posts a {
+    text-decoration: none;
+    color: #202833;
+}
+
+.posts .mainpost {
+    width: 80%;
+    background: #F2F2F2;
+    text-align: center;
+    padding: 5vh 10%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 50vh;
+    margin-bottom: 2.5vh
+}
+
+
+.posts .mainpost .mainpost-title {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.posts .mainpost .mainpost-subtitle {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 30px;
+    letter-spacing: 0.03em;
+}
+
+.posts .mainpost .mainpost-img {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+    margin: 2.5vh 0;
+}
+
+.posts .mainpost .mainpost-body {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0.03em;
+    margin-bottom: 2.5vh;
+    text-align: left;
+}
+
+.posts .mainpost .mainpost-date {
+    text-align: left;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.posts .post {
+    margin: 0 auto;
+    min-height: 25vh;
+    padding: 5vh 0;
+    border-top: 1px #B8B8B8 solid;
+    width: 80%;
+    display: flex;
+    justify-content: start;
+}
+
+.posts .post a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 2.5%;
+}
+
+.posts .post .post-img {
+    width: 40vh;
+    height: 25vh;
+    object-fit: cover;
+}
+
+
+.posts .post .post-text {
+    display: flex;
+    align-items: start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    min-height: 25vh;
+}
+
+.posts .post .post-title {
+    font-size: 38px;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+}
+
+.posts .post .post-body {
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+}
+
+.posts .post .post-date {
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+}
