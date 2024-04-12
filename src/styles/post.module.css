@@ -1,0 +1,121 @@
+.post {
+    width: 100%;
+    min-height: 80vh;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.post .post-infos {
+    width: 85%;
+    min-height: 50vh;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10vh 0;
+}
+
+.post .post-infos .title {
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    max-width: 45%;
+    margin: 0 auto;
+}
+
+.post .post-infos .date {
+    font-weight: 500;
+    font-size: 16px;
+    color: #717171;
+}
+
+.post .post-infos .img {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+    padding: 2.5vh 0;
+}
+
+.post .post-infos .description {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 25px;
+
+}
+
+.post .comments {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.post .comments h2 {
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 1rem;
+}
+
+.post .comments .comment {
+    width: 100%;
+    min-height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+}
+
+.post .comments .comment .author-img img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    border: 2px solid #46A29F;
+}
+
+.post .comments .comment .comment-text {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.post .comments .comment .comment-text .text-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.post .comments .comment .comment-text .text-align .sub-title {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.post .comments .comment .comment-text .text-align .simple-text {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .post .post-infos .title {
+        max-width: 100%;
+    }
+
+    .post .post-infos {
+        width: 95%;
+    }
+
+    .post .comments .comment .author-img img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .post .comments .comment .comment-text .text-align {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .post .comments .comment {
+        align-items: start;
+        justify-content: start;
+        margin-bottom: 1.5rem;
+    }
+    
+    
+}

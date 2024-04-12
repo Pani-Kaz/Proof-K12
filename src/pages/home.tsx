@@ -19,7 +19,7 @@ interface Posts {
 const MainPost: React.FC<Posts> = ({ post, url_formatter, previewText, formatDate }) => {
     return (
         <div className={styles['mainpost']}>
-            <a href={`/post?id=${post?.id}`}>
+            <a href={`/post/${post?.id}`}>
                 <h2 className={styles['mainpost-title']}>{post?.title}</h2>
                 <p className={styles['mainpost-subtitle']}>Aqui você ficará bem informado com nosso blog super top</p>
                 <img className={styles['mainpost-img']} src={url_formatter(post?.image_url)} alt='Image_mainpost' />
@@ -36,7 +36,7 @@ const MainPost: React.FC<Posts> = ({ post, url_formatter, previewText, formatDat
 const Post: React.FC<Posts> = ({ post, url_formatter, previewText, formatDate }) => {
     return (
         <div className={styles['post']}>
-            <a href={`/post?id=${post?.id}`}>
+            <a href={`/post/${post?.id}`}>
                 <div className={styles['post-img']}>
                     <img src={url_formatter(post?.image_url)} alt={`Image_post_${post?.id}`} />
                 </div>

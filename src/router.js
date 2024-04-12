@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Posts from "./pages/posts.tsx";
+import Posts from "./pages/home.tsx";
+import Post from "./pages/post.tsx";
 
 function AppRoutes() {
     return (
@@ -8,7 +9,8 @@ function AppRoutes() {
         }}>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<Posts />}></Route>
+                <Route path='/' element={<Posts />}></Route>
+                <Route path='/post/:postId' element={<Post/>}></Route>
                 </Routes>
             </BrowserRouter>
         </main>

@@ -13,7 +13,7 @@ export const apiEndpoints = {
         return api.get(`/posts`);
     },
     comments: () => {
-        return api.comments(`/comments`);
+        return api.get(`/comments`);
     },
 
 };
