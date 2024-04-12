@@ -19,7 +19,7 @@ const Header = () => {
     
     return (
         <header className={`nav ${menu ? 'nav-active' : ''}`}>
-            <h1 className='title'>Blog K-12</h1>
+            <a href='/' className='title'>Blog K-12</a>
             <ul className='nav-links'>
                 <li className='nav-item'><a href="/posts">Posts</a></li>
                 <a className='login-button nav-item' href="/login"><li>Login</li></a>
