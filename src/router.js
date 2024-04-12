@@ -1,13 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Posts from "./pages/posts.tsx";
 
-function AppRoutes () {
+function AppRoutes() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<Posts/>}></Route>
-            </Routes>
-        </BrowserRouter>
+        <main style={{
+            paddingBottom: '10vh'
+        }}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<Posts />}></Route>
+                </Routes>
+            </BrowserRouter>
+        </main>
     )
 }
 
