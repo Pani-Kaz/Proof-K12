@@ -3,7 +3,7 @@ import { apiEndpoints } from "../api";
 import styles from '../styles/posts.module.css';
 
 interface Posts {
-    mainpost: {
+    post: {
         id: string | number,
         title: string,
         body: string,
@@ -16,21 +16,37 @@ interface Posts {
     formatDate: (s: string | number) => string
 }
 
-const MainPost: React.FC<Posts> = ({ mainpost, url_formatter, previewText, formatDate }) => {
-    console.log(mainpost)
+const MainPost: React.FC<Posts> = ({ post, url_formatter, previewText, formatDate }) => {
     return (
         <div className={styles['mainpost']}>
-        <a href={`/post?id=${mainpost?.id}`}>
-            <h2 className={styles['mainpost-title']}>{mainpost?.title}</h2>
-            <p className={styles['mainpost-subtitle']}>Aqui você ficará bem informado com nosso blog super top</p>
-            <img className={styles['mainpost-img']} src={url_formatter(mainpost?.image_url)} alt='Image_mainpost' />
-            <p className={styles['mainpost-body']}>{previewText(mainpost?.body)}</p>
-            <div className={styles['mainpost-date']}>
-                <span>{mainpost?.time_read} Min &#8226; </span>
-                <span>{formatDate(mainpost?.created_at)}</span>
-            </div>
-        </a>
-    </div>
+            <a href={`/post?id=${post?.id}`}>
+                <h2 className={styles['mainpost-title']}>{post?.title}</h2>
+                <p className={styles['mainpost-subtitle']}>Aqui você ficará bem informado com nosso blog super top</p>
+                <img className={styles['mainpost-img']} src={url_formatter(post?.image_url)} alt='Image_mainpost' />
+                <p className={styles['mainpost-body']}>{previewText(post?.body)}</p>
+                <div className={styles['mainpost-date']}>
+                    <span>{post?.time_read} Min &#8226; </span>
+                    <span>{formatDate(post?.created_at)}</span>
+                </div>
+            </a>
+        </div>
+    )
+};
+
+const Post: React.FC<Posts> = ({ post, url_formatter, previewText, formatDate }) => {
+    return (
+        <div className={styles['post']}>
+            <a href={`/post?id=${post?.id}`}>
+                <div className={styles['post-img']}>
+                    <img src={url_formatter(post?.image_url)} alt={`Image_post_${post?.id}`} />
+                </div>
+                <div className={styles['post-text']}>
+                    <h2 className={styles['post-title']}>{post?.title}</h2>
+                    <p className={styles['post-body']}>{previewText(post?.body)}</p>
+                    <p className={styles['post-date']}>{post?.time_read} Min • {formatDate(post?.created_at)}</p>
+                </div>
+            </a>
+        </div>
     )
 };
 
@@ -76,19 +92,10 @@ const Posts = () => {
     return (
         <div className={styles['posts']}>
             {
-                <MainPost mainpost={mainpost} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
+                <MainPost post={mainpost} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
             }
             {posts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((i: any) => (
-                <div className={styles['post']}>
-                    <a href={`/post?id=${i.id}`}>
-                        <img className={styles['post-img']} src={url_formatter(i.image_url)} alt={`Image_post_${i.id}`} />
-                        <div className={styles['post-text']}>
-                            <h2 className={styles['post-title']}>{i.title}</h2>
-                            <p className={styles['post-body']}>{previewText(i.body)}</p>
-                            <p className={styles['post-date']}>{i.time_read} Min • {formatDate(i.created_at)}</p>
-                        </div>
-                    </a>
-                </div>
+                <Post post={i} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
             )
             )
             }
