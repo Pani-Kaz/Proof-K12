@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { apiEndpoints } from "../api";
-import styles from '../styles/posts.module.css';
+import styles from '../styles/home.module.css';
 
 interface PostsProps {
     post: {
