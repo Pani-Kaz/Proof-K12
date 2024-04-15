@@ -35,12 +35,12 @@ const Comments = () => {
     useEffect(() => {
         apiEndpoints.comments().then(async (data: any) => {
             const res = data.data;
-            const filtered = res.filter((i: any) => String(i?.post_id) == postId);
+            const filtered = res.filter((i: any) => String(i?.post_id) === postId);
             if (filtered) setComments(filtered);
         }).catch((err: any) => {
             throw err
         })
-    }, []);
+    });
 
     return (
         <div className={styles['comments']}>
@@ -95,12 +95,12 @@ const Post = () => {
     useEffect(() => {
         apiEndpoints.posts().then(async (data: any) => {
             const res = data.data;
-            const filtered = res.find((i: any) => i?.id == postId);
+            const filtered = res.find((i: any) => i?.id === postId);
             if (filtered) setPost({ ...post, post: filtered });
         }).catch((err: any) => {
             throw err
         })
-    }, []);
+    });
 
 
 
