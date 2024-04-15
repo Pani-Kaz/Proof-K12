@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { apiEndpoints } from "../api";
 import styles from '../styles/posts.module.css';
 
-interface Posts {
+interface PostsProps {
     post: {
         id: string | number,
         title: string,
@@ -16,7 +16,7 @@ interface Posts {
     formatDate: (s: string | number) => string
 }
 
-const MainPost: React.FC<Posts> = ({ post, url_formatter, previewText, formatDate }) => {
+const MainPost: React.FC<PostsProps> = ({ post, url_formatter, previewText, formatDate }) => {
     return (
         <div className={styles['mainpost']}>
             <a href={`/post/${post?.id}`}>
@@ -33,7 +33,7 @@ const MainPost: React.FC<Posts> = ({ post, url_formatter, previewText, formatDat
     )
 };
 
-const Post: React.FC<Posts> = ({ post, url_formatter, previewText, formatDate }) => {
+const Post: React.FC<PostsProps> = ({ post, url_formatter, previewText, formatDate }) => {
     return (
         <div className={styles['post']}>
             <a href={`/post/${post?.id}`}>
@@ -53,16 +53,29 @@ const Post: React.FC<Posts> = ({ post, url_formatter, previewText, formatDate })
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
-    const [mainpost, setMainpost] = useState({})
+    const [mainpost, setMainpost] = useState({});
+    const [error, setError] = useState("");
 
     useEffect(() => {
-        apiEndpoints.posts().then(async (data: any) => {
-            var res = data.data.sort((a: any, b: any) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-            setMainpost(res.splice(0, 1)[0])
-            setPosts(res);
-        }).catch((err: any) => {
-            throw err
-        })
+        apiEndpoints.posts().then(data => {
+            if (data.data.length > 0) {
+                const sortedData = data.data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+                setMainpost(sortedData.splice(0, 1)[0]);
+                setPosts(sortedData);
+            } else {
+                setError("Não há posts para mostrar.");
+            }
+        }).catch(error => {
+            if (error.response && error.response.status === 404) {
+                setError("Não foi possível encontrar os posts.");
+                console.error('Não encontrado (404): O recurso solicitado não existe.');
+            } else {
+                setError("Falha ao carregar os posts.");
+                console.error('Erro na API:', error);
+            }
+            setPosts([]);
+            setMainpost({});
+        });
     }, []);
 
     const url_formatter = (url: string) => {
@@ -92,12 +105,38 @@ const Posts = () => {
     return (
         <div className={styles['posts']}>
             {
-                <MainPost post={mainpost} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
-            }
-            {posts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((i: any) => (
-                <Post post={i} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
-            )
-            )
+                mainpost && posts.length > 0 ? (
+                    <>
+                        {
+                            <MainPost post={mainpost} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
+                        }
+                        {posts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((i: any) => (
+                            <Post post={i} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
+                        )
+                        )
+                        }
+                        </>
+                ) : error ? (
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '80vh'
+                    }}>
+                      <h1 style={{
+                        color: "#007e76"
+                      }}>{error}</h1>
+                    </div>
+                ) : (
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '80vh'
+                    }}>
+                        <h1>Não encontrei nenhum post atualmente!</h1>
+                    </div>
+                )
             }
         </div>
     )
