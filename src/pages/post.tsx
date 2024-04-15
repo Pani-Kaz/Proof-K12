@@ -37,14 +37,18 @@ const Comments = () => {
             const res = data.data;
             const filtered = res.filter((i: any) => String(i?.post_id) === postId);
             if (filtered) setComments(filtered);
-        }).catch((err: any) => {
-            throw err
-        })
-    });
+        }).catch(error => {
+            if (error.response && error.response.status === 404) {
+                console.error('Não encontrado (404): O recurso solicitado não existe.');
+            } else {
+                console.error('Erro na API:', error);
+            }
+        });
+    }, [postId]);
 
     return (
         <div className={styles['comments']}>
-            <h2 className={styles['title']}>Comentários ({comments?.length || 0})</h2>
+            {comments.length > 0 ? (<h2 className={styles['title']}>Comentários ({comments?.length || 0})</h2>) : (<></>)}
             {comments.map((data: any) => (
                 <div className={styles['comment']}>
                     <div className={styles['author-img']}>
@@ -89,6 +93,7 @@ const Post = () => {
             return `${month} ${day}, ${year}`;
         },
     });
+    const [error, setError] = useState("");
 
     const { postId } = useParams();
 
@@ -97,24 +102,44 @@ const Post = () => {
             const res = data.data;
             const filtered = res.find((i: any) => i?.id === postId);
             if (filtered) setPost({ ...post, post: filtered });
-        }).catch((err: any) => {
-            throw err
-        })
-    });
+            else setError('Não foi possível encontrar o post mencionado.');
+        }).catch(error => {
+            if (error.response && error.response.status === 404) {
+                setError("Não foi possível encontrar o post solicitado.");
+                console.error('Não encontrado (404): O recurso solicitado não existe.');
+            } else {
+                setError("Falha ao carregar os posts.");
+                console.error('Erro na API:', error);
+            }
+        });
+    }, [postId, post]);
 
 
 
     return (
         <div className={styles['post']}>
-            <div className={styles['post-infos']}>
-                <h1 className={styles['title']}>{post.post?.title}</h1>
-                <div className={styles['date']}>
-                    <span>{post.post?.time_read} Min &#8226; </span>
-                    <span>{post.formatDate(post.post?.created_at)}</span>
+            {
+                (post.post && post.post?.title) ? (
+                    <div className={styles['post-infos']}>
+                        <h1 className={styles['title']}>{post.post?.title}</h1>
+                        <div className={styles['date']}>
+                            <span>{post.post?.time_read} Min &#8226; </span>
+                            <span>{post.formatDate(post.post?.created_at)}</span>
+                        </div>
+                        <img className={styles['img']} src={post.url_formatter(post.post?.image_url)} alt='image_post' />
+                        <p className={styles['description']}>{post.post.body}</p>
+                    </div>
+                ) : <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '80vh'
+                }}>
+                    {error ? (<h1 style={{
+                        color: "#007e76"
+                    }}>{error}</h1>) : (<h1>Não foi possível encontrar o post solicitado</h1>)}
                 </div>
-                <img className={styles['img']} src={post.url_formatter(post.post?.image_url)} alt='image_post' />
-                <p className={styles['description']}>{post.post.body}</p>
-            </div>
+            }
             <Comments />
         </div>
     )
