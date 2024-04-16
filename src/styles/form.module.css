@@ -84,6 +84,11 @@
     opacity: 0.8;
 }
 
+.form .error {
+    color: #f00;
+    transition: 0.3s;
+}
+
 @media only screen and (max-width: 1000px) {
     .form .submit,
     .input-section {
