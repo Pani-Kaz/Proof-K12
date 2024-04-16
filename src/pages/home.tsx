@@ -18,7 +18,7 @@ interface PostsProps {
 
 const MainPost: React.FC<PostsProps> = ({ post, url_formatter, previewText, formatDate }) => {
     return (
-        <div className={styles['mainpost']}>
+        <div key={post?.title} className={styles['mainpost']}>
             <a href={`/post/${post?.id}`}>
                 <h2 className={styles['mainpost-title']}>{post?.title}</h2>
                 <p className={styles['mainpost-subtitle']}>Aqui você ficará bem informado com nosso blog super top</p>
@@ -35,7 +35,7 @@ const MainPost: React.FC<PostsProps> = ({ post, url_formatter, previewText, form
 
 const Post: React.FC<PostsProps> = ({ post, url_formatter, previewText, formatDate }) => {
     return (
-        <div className={styles['post']}>
+        <div key={post?.title} className={styles['post']}>
             <a href={`/post/${post?.id}`}>
                 <div className={styles['post-img']}>
                     <img src={url_formatter(post?.image_url)} alt={`Image_post_${post?.id}`} />
@@ -110,8 +110,8 @@ const Posts = () => {
                         {
                             <MainPost post={mainpost} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
                         }
-                        {posts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((i: any) => (
-                            <Post post={i} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
+                        {posts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((i: any, idx: number) => (
+                            <Post key={idx} post={i} url_formatter={url_formatter} previewText={previewText} formatDate={formatDate} />
                         )
                         )
                         }
@@ -124,7 +124,8 @@ const Posts = () => {
                         height: '80vh'
                     }}>
                       <h1 style={{
-                        color: "#007e76"
+                        color: "#007e76",
+                        textAlign: 'center'
                       }}>{error}</h1>
                     </div>
                 ) : (
@@ -132,7 +133,8 @@ const Posts = () => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        height: '80vh'
+                        height: '80vh',
+                        textAlign: 'center'
                     }}>
                         <h1>Não encontrei nenhum post atualmente!</h1>
                     </div>

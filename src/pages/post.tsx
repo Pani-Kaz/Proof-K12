@@ -108,7 +108,7 @@ const Post = () => {
                 setError("Não foi possível encontrar o post solicitado.");
                 console.error('Não encontrado (404): O recurso solicitado não existe.');
             } else {
-                setError("Falha ao carregar os posts.");
+                setError("Falha ao carregar o post solicitado.");
                 console.error('Erro na API:', error);
             }
         });
@@ -136,8 +136,9 @@ const Post = () => {
                     height: '80vh'
                 }}>
                     {error ? (<h1 style={{
-                        color: "#007e76"
-                    }}>{error}</h1>) : (<h1>Não foi possível encontrar o post solicitado</h1>)}
+                        color: "#007e76",
+                        textAlign: 'center'
+                    }}>{error}</h1>) : (<h1 style={{ textAlign: 'center'}}>Não foi possível encontrar o post solicitado</h1>)}
                 </div>
             }
             <Comments />
