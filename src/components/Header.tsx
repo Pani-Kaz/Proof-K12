@@ -21,7 +21,7 @@ const Header = () => {
         <header className={`nav ${menu ? 'nav-active' : ''}`}>
             <a href='/' className='title'>Blog K-12</a>
             <ul className='nav-links'>
-                <li className='nav-item'><a href="/posts">Posts</a></li>
+                <li className='nav-item'><a href="/">Posts</a></li>
                 <a className='login-button nav-item' href="/login"><li>Login</li></a>
                 <a className='register-button nav-item' href="/register"><li>Registre-se</li></a>
             </ul>
