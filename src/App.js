@@ -3,7 +3,7 @@ import Footer from './components/Footer.tsx';
 import Header from './components/Header.tsx'
 import AppRoutes from './router.js';
 import './styles/globals.css';
-import Loading from './pages/Loading.tsx';
+import Loading from './pages/loading.tsx';
 
 function App() {
   const [loading, setLoading] = useState(true);
